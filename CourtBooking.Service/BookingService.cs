@@ -22,12 +22,10 @@ namespace CourtBooking.Service
             }
             Booking booking = JsonConvert.DeserializeObject<Booking>(resultTask);
             return booking;
-
         }
 
         public virtual List<Booking> GetAll()
-        {
-           
+        {           
             List<Booking> bookings;
             string resultTask;
 
@@ -37,9 +35,7 @@ namespace CourtBooking.Service
             }
 
             bookings = JsonConvert.DeserializeObject<List<Booking>>(resultTask);
-
             return bookings;
-
         }
     }
 }

@@ -13,6 +13,7 @@ namespace CourtBooking.ManualTest
         {
             WriteAll();
         }
+
         public static void WriteAll()
         {
             List<Booking> bookings = bookingService.GetAll();
@@ -22,6 +23,7 @@ namespace CourtBooking.ManualTest
                 Console.WriteLine(booking);
             }
         }
+
         public static void WriteSingle()
         {
             Booking booking = bookingService.GetSingle(1);

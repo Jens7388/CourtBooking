@@ -16,6 +16,7 @@ namespace CourtBooking.Entities
             BookingTime = bookingTime;
             Booker = booker;
         }
+
         public virtual int Id
         {
             get
@@ -55,6 +56,7 @@ namespace CourtBooking.Entities
                 }
             }
         }
+
         public virtual DateTime BookingTime
         {
             get
@@ -94,6 +96,7 @@ namespace CourtBooking.Entities
                 }
             }
         }
+
         public override string ToString()
         {
             return $"ID: {id}, Court number: {courtNumber}, Booking time: {bookingTime}, Booker: {booker}";
@@ -110,6 +113,7 @@ namespace CourtBooking.Entities
                 return (true, String.Empty);
             }
         }
+
         public virtual (bool, string) ValidateBookingTime(DateTime bookingTime)
         {
             if(bookingTime.Year == DateTime.MinValue.Year)
