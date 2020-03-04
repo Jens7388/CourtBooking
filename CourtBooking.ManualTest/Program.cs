@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using CourtBooking.Service;
+using System;
 
 namespace CourtBooking.ManualTest
 {
@@ -6,6 +8,8 @@ namespace CourtBooking.ManualTest
     {
         static void Main()
         {
+            BookingService.GetSingle(1);
+            BookingService.GetAll();
         }
     }
 }
