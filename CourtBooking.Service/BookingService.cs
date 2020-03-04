@@ -1,5 +1,7 @@
-﻿
+﻿using CourtBooking.Entities;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -7,52 +9,37 @@ namespace CourtBooking.Service
 {
     public class BookingService
     {
-        readonly static string url = @"https://api.aspitcloud.dk/bookings";
+        readonly string url = @"https://api.aspitcloud.dk/bookings";
 
-        public static string GetSingle(int id = 1)
+        public virtual Booking GetSingle(int id)
         {
-            try
-            {
-                string urlForSingle = $"{url}/{id}";
-                using(WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(urlForSingle);
-                    return json;
-                }
-            }
-            catch(Exception ex)
-            {
-                return ex.Message;
-            }
-        }
+            string urlForSingle = $"{url}/{id}";
+            string resultTask;
 
-        public static string GetAll()
-        {
-            string urlForAll = $"{url}";
-            try
-            {
-                using(WebClient client = new WebClient())
-                {
-                    string json = client.DownloadString(urlForAll);
-                    return json;
-                }
-            }
-            catch(Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-        /*
-        private Task<string> CallWebApi(string url)
-        {
             using(WebClient client = new WebClient())
             {
-                return client.DownloadString(url);
+                resultTask = client.DownloadString(urlForSingle);
             }
+            Booking booking = JsonConvert.DeserializeObject<Booking>(resultTask);
+            return booking;
+
         }
-        private Booking UnpackFrom(string json)
+
+        public virtual List<Booking> GetAll()
         {
-            return JsonConvert.DeserializeObject<Booking>(json);
-        }*/
+           
+            List<Booking> bookings;
+            string resultTask;
+
+            using(WebClient client = new WebClient())
+            {
+                resultTask = client.DownloadString(url);
+            }
+
+            bookings = JsonConvert.DeserializeObject<List<Booking>>(resultTask);
+
+            return bookings;
+
+        }
     }
 }

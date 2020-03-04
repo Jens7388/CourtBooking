@@ -9,6 +9,13 @@ namespace CourtBooking.Entities
         protected DateTime bookingTime;
         protected int booker;
 
+        public Booking(int id, int courtNumber, DateTime bookingTime, int booker)
+        {
+            Id = id;
+            CourtNumber = courtNumber;
+            BookingTime = bookingTime;
+            Booker = booker;
+        }
         public virtual int Id
         {
             get
@@ -83,15 +90,20 @@ namespace CourtBooking.Entities
                 }
                 if(value != booker)
                 {
-                   booker = value;
+                    booker = value;
                 }
             }
         }
+        public override string ToString()
+        {
+            return $"ID: {id}, Court number: {courtNumber}, Booking time: {bookingTime}, Booker: {booker}";
+        }
+
         public virtual (bool, string) ValidateInts(int integer)
         {
-            if(id < 1)
+            if(id < 0)
             {
-                return (false, "Ingen af tallene må være under 1!");
+                return (false, "Ingen af tallene må være under 0!");
             }
             else
             {
@@ -106,7 +118,7 @@ namespace CourtBooking.Entities
             }
             else
             {
-                return (false, String.Empty);
+                return (true, String.Empty);
             }
         }
     }

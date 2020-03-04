@@ -1,15 +1,31 @@
-﻿
+﻿using CourtBooking.Entities;
 using CourtBooking.Service;
 using System;
+using System.Collections.Generic;
 
 namespace CourtBooking.ManualTest
 {
     class Program
     {
-        static void Main()
+        public static BookingService bookingService = new BookingService();
+
+        public static void Main()
         {
-            BookingService.GetSingle(1);
-            BookingService.GetAll();
+            WriteAll();
+        }
+        public static void WriteAll()
+        {
+            List<Booking> bookings = bookingService.GetAll();
+
+            foreach(Booking booking in bookings)
+            {
+                Console.WriteLine(booking);
+            }
+        }
+        public static void WriteSingle()
+        {
+            Booking booking = bookingService.GetSingle(1);
+            Console.WriteLine(booking);
         }
     }
 }
